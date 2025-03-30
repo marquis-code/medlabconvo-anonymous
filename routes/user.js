@@ -3,14 +3,14 @@ const { google } = require("googleapis");
 let router = express.Router();
 require("dotenv").config();
 
-router.post("/signup", async (req, res) => {
-    const { firstName, lastName, email, phoneNumber, age, gender, weight_loss_goal, current_activity_level, diet_preferences, preferred_communication_method, additional_questions } = req.body;
+router.post("/anonymous", async (req, res) => {
+    const { whatDoYouWantUsToCallYou, askYourQuestion, anyOtherThingYouWishToTellTheMedLabConvoTeam } = req.body;
     const auth = new google.auth.GoogleAuth({
-      keyFile: "credentials.json",
+      keyFile: "joke.json",
       scopes: "https://www.googleapis.com/auth/spreadsheets",
     });
     const client = await auth.getClient();
-    const spreadsheetId = "1c137Dp6Fh0ZTcCY7s9Rod4D7Y6RVH1MUFO6ata5N8_c";
+    const spreadsheetId = "1cIdXn1c2GnIrglyhCsdmsCQJVaf034brpgzdR_jmB8w";
     const googleSheets = google.sheets({
       version: "v4",
       auth: client,
@@ -33,7 +33,7 @@ router.post("/signup", async (req, res) => {
       range: "Sheet1!A:B",
       valueInputOption: "USER_ENTERED",
       resource: {
-        values: [[ firstName, lastName, email, phoneNumber, age, gender, weight_loss_goal, current_activity_level, diet_preferences, preferred_communication_method, additional_questions ]],
+        values: [[ whatDoYouWantUsToCallYou, askYourQuestion, anyOtherThingYouWishToTellTheMedLabConvoTeam ]],
       },
     });
   
@@ -45,11 +45,11 @@ router.post("/signup", async (req, res) => {
   router.post("/news-letters", async (req, res) => {
     const { email } = req.body;
     const auth = new google.auth.GoogleAuth({
-      keyFile: "news-credentials.json",
+      keyFile: "joke.json",
       scopes: "https://www.googleapis.com/auth/spreadsheets",
     });
     const client = await auth.getClient();
-    const spreadsheetId = "1TGVL_flVBF-daUp0nsd85GuW2QvB4eCZDpi3HEUY2Tg";
+    const spreadsheetId = "1cIdXn1c2GnIrglyhCsdmsCQJVaf034brpgzdR_jmB8w";
     const googleSheets = google.sheets({
       version: "v4",
       auth: client,
